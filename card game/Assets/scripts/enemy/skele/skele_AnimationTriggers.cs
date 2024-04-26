@@ -23,4 +23,6 @@ public class skele_AnimationTriggers : MonoBehaviour
 
         }
     }
+    protected void openCounterWindow()=>ske.openCounterAttackWindow();
+    protected void closeCounterWindow()=>ske.closeCounterAttackWindow();
 }

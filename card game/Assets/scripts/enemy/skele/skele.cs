@@ -11,6 +11,8 @@ public class skele : enemy
     public skele_battleState battleState { get; private set; }
 
     public skele_attackState attackState { get; private set; }
+
+    public skele_stunedState stunedState { get; private set; }
     #endregion
 
 
@@ -21,6 +23,7 @@ public class skele : enemy
         moveState = new skele_moveState(this, stateMachine, "move", this);
         battleState = new skele_battleState(this, stateMachine, "move", this);
         attackState = new skele_attackState(this, stateMachine, "attack", this);
+        stunedState = new skele_stunedState(this, stateMachine, "stun", this);
     }
 
     protected override void Start()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 
-{
+{   
     [Header("Collision info")]
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected Transform groundCheck;
@@ -19,7 +19,13 @@ public class Entity : MonoBehaviour
     #region AttackInfo
     public Transform attackCheck;
     public float attackCheckRadius;
+
     #endregion
+    public entityFx damagedFX {  get; private set; }
+    [Header("knockback info")]
+    [SerializeField] protected Vector2 knockbackDirection;
+    [SerializeField] protected float knockbackDuration;
+    protected bool isKnocked;
     protected virtual void Awake()
     {
 
@@ -27,6 +33,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Start()
     {
+        damagedFX = GetComponentInChildren<entityFx>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -73,12 +80,24 @@ public class Entity : MonoBehaviour
 
     public virtual void damage()
     {
-
+        damagedFX.StartCoroutine("flashFX");
+        StartCoroutine("hitKnockBack");
     }
     public void setVelocity(float xVelocity, float yVelocity)
     {
+        if (isKnocked)
+        {
+            return;
+        }
         rb.velocity = new Vector2(xVelocity, yVelocity);
         flipController(xVelocity);
     }
+    protected virtual IEnumerator hitKnockBack()
+    {
+        isKnocked = true;
+        rb.velocity = new Vector2(knockbackDirection.x * -facingDir, knockbackDirection.y);
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnocked = false;
 
+    }
 }

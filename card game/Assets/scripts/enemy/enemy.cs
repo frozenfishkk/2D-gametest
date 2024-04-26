@@ -17,7 +17,10 @@ public class enemy : Entity
     #endregion
     [SerializeField] protected LayerMask player;
     public float playerDetectDistance;
-
+    [Header("stun info")]
+    public float stunTime;
+    protected bool canStunned;
+    [SerializeField] protected GameObject counterImage;
     protected override void Awake()
     {   
         base.Awake();
@@ -47,4 +50,14 @@ public class enemy : Entity
         stateMachine.currentState.AnimationFinishTrigger(); 
     }
 
+    public virtual void openCounterAttackWindow()
+    {
+        canStunned = true;
+        counterImage.SetActive(true);
+    }
+    public virtual void closeCounterAttackWindow()
+    {
+        canStunned = false;
+        counterImage.SetActive(false);
+    }
 }

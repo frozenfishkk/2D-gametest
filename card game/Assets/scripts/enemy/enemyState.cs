@@ -11,6 +11,7 @@ public class enemyState
     private string animBoolName;
     public float battleTime;
     protected float stateTimer;
+
     public enemyState(enemy enemyBase, enemyStateMachine stateMachine,  string animBoolName)
     {
         this.enemyBase = enemyBase;

@@ -84,6 +84,10 @@
     <Compile Include="Assets\scripts\player\playerIdleState.cs" />
     <Compile Include="Assets\scripts\enemy\skele\skele_attackState.cs" />
     <Compile Include="Assets\scripts\player\playerJumpState.cs" />
+    <Compile Include="Assets\scripts\entityFx.cs" />
+    <Compile Include="Assets\scripts\enemy\skele\skele_stunedState.cs" />
+    <Compile Include="Assets\scripts\player\playerCounterAttackState.cs" />
+    <Compile Include="Assets\scripts\player\playerSuccessCounterState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
