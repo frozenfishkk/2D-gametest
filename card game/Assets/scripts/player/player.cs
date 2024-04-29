@@ -6,6 +6,7 @@ public class player : Entity
 {
     [Header("Attack details")]
     public float[] attackMovement ;
+    public float counterAttackDuration=.2f;
     public bool playerIsBusy { get; private set; }
     [Header("Move info")]
     public float moveSpeed = 16f;
@@ -76,6 +77,7 @@ public class player : Entity
     {   
         base.Update();
         stateMachine.currentState.Update();
+
 
     }
 

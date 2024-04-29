@@ -30,6 +30,10 @@ public class playerGroundState : playerState
     {
         base.Update();
         checkAttack();
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            stateMachine.ChangeState(player.playerCounterAttackState);
+        }
         if (!player.isGrounded) {stateMachine.ChangeState(player.airState);}
         if (Input.GetKeyDown(KeyCode.Space)&& player.isGrounded)
          {

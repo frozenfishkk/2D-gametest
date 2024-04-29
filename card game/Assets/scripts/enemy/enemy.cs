@@ -60,4 +60,13 @@ public class enemy : Entity
         canStunned = false;
         counterImage.SetActive(false);
     }
+
+    public virtual bool canBeStunned()
+    {
+        if (canStunned)
+        {
+            return true;
+        }
+        return false;
+    }
 }

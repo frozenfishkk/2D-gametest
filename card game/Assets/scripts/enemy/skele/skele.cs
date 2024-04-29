@@ -36,4 +36,13 @@ public class skele : enemy
     {
         base.Update();
     }
+
+    public override bool canBeStunned()
+    {
+        if (base.canBeStunned())
+        {
+            stateMachine.ChangeState(stunedState); return true;
+        }
+        return false;
+    }
 }
