@@ -24,7 +24,6 @@ public class playerIdleState : playerGroundState
     {
         base.Update();
 
-        Debug.Log(xInput);
         if(xInput != 0 && !player.playerIsBusy) 
         {
             stateMachine.ChangeState(player.moveState);
