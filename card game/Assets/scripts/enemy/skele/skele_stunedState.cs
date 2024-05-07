@@ -17,7 +17,8 @@ public skele_stunedState(enemy enemyBase, enemyStateMachine stateMachine, string
     }
 
     public override void Enter()
-    {
+    {   
+        Debug.Log("stun");
         base.Enter();
         stateTimer = skele.stunTime;
         skele.damagedFX.InvokeRepeating("colorBlink", 0, .1f);

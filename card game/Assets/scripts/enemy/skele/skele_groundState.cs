@@ -16,7 +16,7 @@ public class skele_groundState :enemyState
     public override void Enter()
     {
         base.Enter();
-        player = GameObject.Find("player").transform;
+        player = playerManager.instance.player.transform;
     }
 
     public override void Exit()

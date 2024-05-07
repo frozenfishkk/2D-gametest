@@ -11,6 +11,7 @@ public class playerPrimaryAttackState : playerState
     private int comboCounter;
     private float lastTimeAttacked;
     private float comboWindow=1;
+    
     public override void Enter()
     {
         base.Enter();
@@ -28,13 +29,14 @@ public class playerPrimaryAttackState : playerState
         player.animator.SetInteger("combocounter",comboCounter);
         generalStateTimer = 0.1f;
         player.busyFor(.2f);
+        comboCounter++;
 
     }
 
     public override void Exit()
     {
         base.Exit();
-        comboCounter++;
+        
         lastTimeAttacked = Time.time;
     }
 

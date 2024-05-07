@@ -30,7 +30,6 @@ public class playerState
 
     public virtual void Update()
     {
-        player.dashTimer -= Time.deltaTime;
         xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
         player.animator.SetFloat("yVelocity", player.rb.velocity.y);
@@ -45,14 +44,16 @@ public class playerState
     private void checkDash()
     {
         
-        if (Input.GetKeyDown(KeyCode.LeftShift) && player.dashTimer<0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && skillManager.instance.dashSkill.canUseSkill())
         {
-            player.dashTimer = player.dashColdDown;
+
             player.dashDir = Input.GetAxisRaw("Horizontal");
             if (player.dashDir == 0) { player.dashDir = player.facingDir; }
             stateMachine.ChangeState(player.dashState);
         }
     }
+
+
 
     public virtual void Exit()
     {

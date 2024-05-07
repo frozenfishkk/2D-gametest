@@ -15,8 +15,7 @@ public class player : Entity
     public float dashSpeed = 30f;
     public float dashDuration = 0.2f;
     public float dashDir;
-    public float dashColdDown = 0.6f;
-    public float dashTimer;
+
 
 
 
@@ -39,6 +38,10 @@ public class player : Entity
     public playerCounterAttackState playerCounterAttackState {  get; private set; }
 
     public playerSuccessCounterState playerSuccessCounterState { get; private set; }
+    
+    public playerAimSwordState playerAimSwordState{ get; private set; }
+    
+    public playerCatchSwordState playerCatchSwordState{ get; private set; }
     #endregion
 
     protected override void Awake()
@@ -55,6 +58,8 @@ public class player : Entity
         primaryAttackState = new playerPrimaryAttackState(stateMachine, this, "primaryattack");
          playerCounterAttackState = new playerCounterAttackState(stateMachine, this, "counterattack");
         playerSuccessCounterState = new playerSuccessCounterState(stateMachine, this, "successcounter");
+        playerAimSwordState = new playerAimSwordState(stateMachine, this, "aimsword");
+        playerCatchSwordState = new playerCatchSwordState(stateMachine, this, "catchsword");
 
 
 

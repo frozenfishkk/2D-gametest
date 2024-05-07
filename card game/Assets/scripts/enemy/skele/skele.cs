@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,10 +39,12 @@ public class skele : enemy
     }
 
     public override bool canBeStunned()
-    {
+    {   
         if (base.canBeStunned())
         {
-            stateMachine.ChangeState(stunedState); return true;
+            
+             stateMachine.ChangeState(stunedState);
+             return true;
         }
         return false;
     }

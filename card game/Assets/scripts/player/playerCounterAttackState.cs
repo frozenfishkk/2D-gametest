@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class playerCounterAttackState : playerState
     }
 
     public override void Enter()
-    {
+    {   
         base.Enter();
         stateTimer = player.counterAttackDuration;
         player.animator.SetBool("successcounter", false);
@@ -38,12 +39,13 @@ public class playerCounterAttackState : playerState
                 if (hit.GetComponent<enemy>().canBeStunned()) {
                     player.animator.SetBool("successcounter", true);
                     stateTimer = 10;
+                    hit.GetComponent<enemy>().closeCounterAttackWindow();
+                    
                 }
                 
                 
             }
         }
-        Debug.Log(triggerCalled);
         if(stateTimer<0 || triggerCalled)
         {
             player.animator.SetBool("successcounter", false);

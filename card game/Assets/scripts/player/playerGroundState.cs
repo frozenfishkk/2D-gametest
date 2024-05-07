@@ -14,6 +14,14 @@ public class playerGroundState : playerState
             stateMachine.ChangeState(player.primaryAttackState);
         }
     }
+    private void checkThrow()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) )
+        {
+            
+            stateMachine.ChangeState(player.playerAimSwordState);
+        }
+    }
     public override void Enter()
     {
         base.Enter();
@@ -30,6 +38,7 @@ public class playerGroundState : playerState
     {
         base.Update();
         checkAttack();
+        checkThrow();
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             stateMachine.ChangeState(player.playerCounterAttackState);
