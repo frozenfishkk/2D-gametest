@@ -16,8 +16,8 @@ public class player : Entity
     public float dashDuration = 0.2f;
     public float dashDir;
 
-
-
+    public GameObject sword{ get; private set; }
+    public float swordReturnForce;
 
 
     #region States
@@ -71,6 +71,16 @@ public class player : Entity
         stateMachine.Initialized(idleState);
         
 
+    }
+
+    public void assginSword(GameObject newsword)
+    {
+        sword = newsword;
+    }
+
+    public void deleteSword()
+    {
+        Destroy(sword);
     }
     public IEnumerator busyFor(float seconds)
     {   

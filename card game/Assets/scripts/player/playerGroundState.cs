@@ -16,10 +16,18 @@ public class playerGroundState : playerState
     }
     private void checkThrow()
     {
-        if (Input.GetKeyDown(KeyCode.Q) )
+        if (Input.GetKeyDown(KeyCode.Q)&&!player.sword )
         {
             
             stateMachine.ChangeState(player.playerAimSwordState);
+        }
+    }
+
+    private void checkCallBack()
+    {
+        if (Input.GetKey(KeyCode.Q)&&player.sword) 
+        {  
+            skillManager.instance.throwSkill.callBackSword();
         }
     }
     public override void Enter()
@@ -39,6 +47,7 @@ public class playerGroundState : playerState
         base.Update();
         checkAttack();
         checkThrow();
+        checkCallBack();
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             stateMachine.ChangeState(player.playerCounterAttackState);

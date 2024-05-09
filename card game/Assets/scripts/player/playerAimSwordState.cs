@@ -11,6 +11,7 @@ public class playerAimSwordState : playerState
     public override void Enter()
     {
         base.Enter();
+        skillManager.instance.throwSkill.createDots();
         
     }
 
@@ -18,15 +19,30 @@ public class playerAimSwordState : playerState
     {
         base.Update();
         player.setVelocity(0,0);
-        if (Input.GetKeyDown(KeyCode.Q))
+        skillManager.instance.throwSkill.generateDots(true);
+        if (skillManager.instance.throwSkill.aimDirection().x>0 &&player.facingDir <0)
         {
+            player.Flip();
+        }
+        else if (skillManager.instance.throwSkill.aimDirection().x<0 &&player.facingDir >0)
+        {
+            player.Flip();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {   
+            
             stateMachine.ChangeState(player.idleState);
+            
         }
     }
 
     public override void Exit()
     {
         base.Exit();
+        skillManager.instance.throwSkill.generateDots(false);
+        player.StartCoroutine("busyFor", 0.2f);
+        
     }
 
     public override void AnimationFinishTrigger()

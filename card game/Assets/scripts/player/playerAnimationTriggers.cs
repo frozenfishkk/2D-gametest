@@ -21,4 +21,13 @@ public class playerAnimationTriggers : MonoBehaviour
             }
         }
     }
+
+    private void throwTrigger()
+    {
+        if (player.sword==null)
+        {
+            skillManager.instance.throwSkill.createSword();
+        }
+        
+    }
 }
