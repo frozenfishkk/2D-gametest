@@ -20,7 +20,7 @@ public class throwSwordSkill : skill
     [SerializeField] float swordGravity;
     [SerializeField] public float returningSpeed;
     private Vector2 finalDirection;
-
+    [SerializeField] private float maxDistanceAmongSword;
     [Header("aim dots info")] 
     [SerializeField]private int dotsNumber;
 
@@ -30,27 +30,61 @@ public class throwSwordSkill : skill
     private GameObject[] dots;
     [Header("bounce info")]
     [SerializeField]private int amountOfBounce;
-    private void changeSwordType(GameObject sword)
+    [SerializeField] private float bounceGravity;
+    [Header("pierce info")]
+    [SerializeField] private Vector2 pierceSpeed;
+
+    [SerializeField] private int pierceAmount;
+    [SerializeField] private float pierceGravity;
+    [Header("spin info")] 
+    [SerializeField]private float spinDuration;
+
+    [SerializeField]private float hitColdown;
+
+    public void changeSwordTypeRB(swordType swordType)
     {
-        throwSwordController swordController = sword.GetComponent<throwSwordController>();
+        if (swordType == swordType.regular)
+        {
+            finalDirection = launchSpeed;
+        }
+        else if (swordType == swordType.bounce)
+        {
+            finalDirection = launchSpeed;
+            swordGravity = bounceGravity;
+        }
+        else if (swordType == swordType.pierce)
+        {   
+            finalDirection = pierceSpeed;
+            swordGravity = pierceGravity;
+        }
+        else if (swordType == swordType.spin)
+        {
+            finalDirection = launchSpeed;
+        }
+    }
+
+    public void changeSwordType(GameObject sword)
+    {
+        sword.GetComponent<throwSwordController>().setMaxDistance(maxDistanceAmongSword);
         if (SwordType == swordType.regular)
         {
             
         }
         else if (SwordType == swordType.bounce)
         {   
-            
-            swordController.setUpBounce(true,amountOfBounce);
+            sword.GetComponent<throwSwordController>().setUpBounce(true,amountOfBounce);
+
         }
         else if (SwordType == swordType.pierce)
-        {
-            
+        {   
+            sword.GetComponent<throwSwordController>().setUpPierce(pierceAmount);
         }
         else if (SwordType == swordType.spin)
         {
-            
+            sword.GetComponent<throwSwordController>().setUpSpin(spinDuration,hitColdown);
         }
     }
+
     public void createSword()
     {
         GameObject newSword = Instantiate(swordPrefab);
@@ -94,8 +128,8 @@ public class throwSwordSkill : skill
     }
     private Vector2 dotsPosition(float time)
     {
-        Vector2 postion = (Vector2)player.transform.position + new Vector2(aimDirection().normalized.x * launchSpeed.x,
-                              aimDirection().normalized.y * launchSpeed.y) * time +
+        Vector2 postion = (Vector2)player.transform.position + new Vector2(aimDirection().normalized.x * finalDirection.x,
+                              aimDirection().normalized.y * finalDirection.y) * time +
                           .5f * (Physics2D.gravity * swordGravity) * (time * time);
         return postion;
     }

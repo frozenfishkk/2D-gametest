@@ -14,7 +14,7 @@ public class enemy : Entity
     #region move
     public float moveSpeed;
     public float idleTime;
-
+    public float defaultMoveSpeed;
     #endregion
     [SerializeField] protected LayerMask player;
     public float playerDetectDistance;
@@ -22,13 +22,33 @@ public class enemy : Entity
     public float stunTime;
     protected bool canStunned;
     [SerializeField] protected GameObject counterImage;
+
     protected override void Awake()
     {   
         base.Awake();
         stateMachine = new enemyStateMachine();
     }
 
+    protected virtual void freezeTime(bool isFrozen)
+    {
+        if (isFrozen)
+        {
+            moveSpeed = 0;
+            animator.speed = 0;
+        }
+        else
+        {
+            moveSpeed = defaultMoveSpeed;
+            animator.speed = 1;
+        }
+    }
 
+    protected virtual IEnumerator stopTime(float seconds)
+    {
+        freezeTime(true);
+        yield return new WaitForSeconds(seconds);
+        freezeTime(false);
+    }
     protected override void Start()
     {
         base.Start();

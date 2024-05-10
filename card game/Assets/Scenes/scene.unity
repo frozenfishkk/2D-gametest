@@ -4999,6 +4999,7 @@ MonoBehaviour:
   attackTimer: 0
   moveSpeed: 1.5
   idleTime: 1.3
+  defaultMoveSpeed: 0
   player:
     serializedVersion: 2
     m_Bits: 64
@@ -6532,6 +6533,7 @@ MonoBehaviour:
   attackTimer: 0
   moveSpeed: 1.5
   idleTime: 1.3
+  defaultMoveSpeed: 0
   player:
     serializedVersion: 2
     m_Bits: 64
@@ -6626,7 +6628,7 @@ Transform:
   m_GameObject: {fileID: 1586330251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.56, y: -0.77, z: 0}
+  m_LocalPosition: {x: -12.57, y: -0.47, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7040,11 +7042,18 @@ MonoBehaviour:
   launchSpeed: {x: 20, y: 30}
   swordGravity: 3
   returningSpeed: 0.1
+  maxDistanceAmongSword: 40
   dotsNumber: 20
   spaceBetweenDots: 0.07
   dotsPrefab: {fileID: 2082054628290317564, guid: 921810717f4b6d843866ca93939e9744, type: 3}
   dotsParent: {fileID: 1403210188}
   amountOfBounce: 4
+  bounceGravity: 3
+  pierceSpeed: {x: 30, y: 30}
+  pierceAmount: 2
+  pierceGravity: 1
+  spinDuration: 2
+  hitColdown: 0.2
 --- !u!1 &1951964135
 GameObject:
   m_ObjectHideFlags: 0

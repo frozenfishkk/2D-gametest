@@ -12,6 +12,7 @@ public class playerAimSwordState : playerState
     {
         base.Enter();
         skillManager.instance.throwSkill.createDots();
+        skillManager.instance.throwSkill.changeSwordTypeRB(skillManager.instance.throwSkill.SwordType);
         
     }
 
