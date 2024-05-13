@@ -48,4 +48,9 @@ public class skele : enemy
         }
         return false;
     }
+
+    public override void freezeTime(bool isFrozen)
+    {
+        base.freezeTime(isFrozen);
+    }
 }

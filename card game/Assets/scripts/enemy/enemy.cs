@@ -29,7 +29,7 @@ public class enemy : Entity
         stateMachine = new enemyStateMachine();
     }
 
-    protected virtual void freezeTime(bool isFrozen)
+    public virtual void freezeTime(bool isFrozen)
     {
         if (isFrozen)
         {

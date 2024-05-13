@@ -30,6 +30,15 @@ public class playerGroundState : playerState
             skillManager.instance.throwSkill.callBackSword();
         }
     }
+
+    private void checkSkillBlackHole()
+    {
+        if (Input.GetKey(KeyCode.F)) 
+        {  
+            stateMachine.ChangeState(player.playerBlackHoleState);
+        }
+    }
+    
     public override void Enter()
     {
         base.Enter();
@@ -48,6 +57,7 @@ public class playerGroundState : playerState
         checkAttack();
         checkThrow();
         checkCallBack();
+        checkSkillBlackHole();
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             stateMachine.ChangeState(player.playerCounterAttackState);

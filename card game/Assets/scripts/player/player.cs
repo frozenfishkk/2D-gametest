@@ -11,11 +11,17 @@ public class player : Entity
     [Header("Move info")]
     public float moveSpeed = 16f;
     public float jumpForce;
+    public float DefaultGravity = 3.5f;
     [Header("Dash info")]
     public float dashSpeed = 30f;
     public float dashDuration = 0.2f;
     public float dashDir;
 
+    #region skillInfo
+
+    [Header("blackHole info")] public float flyTime;
+    public float flySpeed;
+    #endregion
     public GameObject sword{ get; private set; }
     public float swordReturnForce;
 
@@ -42,6 +48,8 @@ public class player : Entity
     public playerAimSwordState playerAimSwordState{ get; private set; }
     
     public playerCatchSwordState playerCatchSwordState{ get; private set; }
+    
+    public playerBlackHoleState playerBlackHoleState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -60,6 +68,7 @@ public class player : Entity
         playerSuccessCounterState = new playerSuccessCounterState(stateMachine, this, "successcounter");
         playerAimSwordState = new playerAimSwordState(stateMachine, this, "aimsword");
         playerCatchSwordState = new playerCatchSwordState(stateMachine, this, "catchsword");
+        playerBlackHoleState= new playerBlackHoleState(stateMachine, this, "jump");
 
 
 
@@ -71,6 +80,13 @@ public class player : Entity
         stateMachine.Initialized(idleState);
         
 
+    }
+
+
+
+    public void exitBlackHoleSkill()
+    {
+        stateMachine.ChangeState(airState);
     }
 
     public void assginSword(GameObject newsword)

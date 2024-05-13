@@ -30,7 +30,7 @@ public class skill : MonoBehaviour
         
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         player = playerManager.instance.player;
     }

@@ -11,7 +11,8 @@ public class clone_skill : skill
     public void createClone(Transform cloneTransform)
     {
         GameObject new_clone = Instantiate(clone_prefab);
-        new_clone.GetComponent<cloneController>().setupClone(cloneTransform,cloneDuration,loseColorSpeed,playerManager.instance.player.animator.GetInteger("combocounter")+1);
+        int random = UnityEngine.Random.Range(1, 4);
+        new_clone.GetComponent<cloneController>().setupClone(cloneTransform,cloneDuration,loseColorSpeed,random);
         
     }
     public override bool canUseSkill()

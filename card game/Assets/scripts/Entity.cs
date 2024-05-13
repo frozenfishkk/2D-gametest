@@ -15,11 +15,12 @@ public class Entity : MonoBehaviour
     #region Compenents
     public Animator animator { get; private set; }
     public Rigidbody2D rb { get; private set; }
+    public SpriteRenderer sr { get; private set; }
     #endregion
     #region AttackInfo
     public Transform attackCheck;
     public float attackCheckRadius;
-
+    
     #endregion
     public entityFx damagedFX {  get; private set; }
     [Header("knockback info")]
@@ -36,8 +37,20 @@ public class Entity : MonoBehaviour
         damagedFX = GetComponentInChildren<entityFx>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
+    public void invis(bool isInvis)
+    {
+        if (isInvis)
+        {
+            sr.color = Color.clear;
+        }
+        else
+        {
+            sr.color = Color.white;
+        }
+    }
     
     protected virtual void Update()
     {
