@@ -12,10 +12,9 @@ public class playerDashState : playerState
     public override void Enter()
     {
         base.Enter();
-        if (skillManager.instance.cloneSkill.canUseSkill())
-        {
-            skillManager.instance.cloneSkill.createClone(player.transform);
-        }
+
+        skillManager.instance.cloneSkill.createCloneOnDashStart(player.transform);
+
         
         timer = player.dashDuration;
     }

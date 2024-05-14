@@ -7,6 +7,7 @@ public class clone_skill : skill
     [SerializeField] private GameObject clone_prefab;
     [SerializeField] private float cloneDuration;
     [SerializeField] private float loseColorSpeed;
+    [SerializeField]private bool canDashClone;
     
     public void createClone(Transform cloneTransform)
     {
@@ -15,9 +16,19 @@ public class clone_skill : skill
         new_clone.GetComponent<cloneController>().setupClone(cloneTransform,cloneDuration,loseColorSpeed,random);
         
     }
+
+    public void createCloneOnDashStart(Transform cloneTransform)
+    {
+        if (canDashClone)
+        {
+            createClone(cloneTransform);
+        }
+    }
+
     public override bool canUseSkill()
     {
         return base.canUseSkill();
+        
     }
 
     public override void useSkill()
