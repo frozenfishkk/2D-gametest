@@ -36,6 +36,11 @@ public class playerState
         stateTimer-= Time.deltaTime;
         generalStateTimer-= Time.deltaTime;
         checkDash();
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            skillManager.instance.crystalSkill.useSkill();
+        }
+
         
 
     }

@@ -51,6 +51,7 @@
     <Compile Include="Assets\scripts\enemy\enemyStateMachine.cs" />
     <Compile Include="Assets\scripts\player\playerMoveState.cs" />
     <Compile Include="Assets\scripts\entityFx.cs" />
+    <Compile Include="Assets\scripts\skill\crystalController.cs" />
     <Compile Include="Assets\scripts\enemy\skele\skele_attackState.cs" />
     <Compile Include="Assets\scripts\player\playerStateMachine.cs" />
     <Compile Include="Assets\scripts\player\playerManager.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Assets\scripts\skill\clone_skill.cs" />
     <Compile Include="Assets\scripts\enemy\skele\skele_moveState.cs" />
     <Compile Include="Assets\scripts\enemy\skele\skele_AnimationTriggers.cs" />
+    <Compile Include="Assets\scripts\skill\crystalSkill.cs" />
     <Compile Include="Assets\scripts\skill\throwSwordSkill.cs" />
     <Compile Include="Assets\scripts\enemy\skele\skele_stunedState.cs" />
     <Compile Include="Assets\scripts\player\playerIdleState.cs" />

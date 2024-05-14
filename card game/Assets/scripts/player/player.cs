@@ -109,7 +109,6 @@ public class player : Entity
         base.Update();
         stateMachine.currentState.Update();
 
-
     }
 
 
