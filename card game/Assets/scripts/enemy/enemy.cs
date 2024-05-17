@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class enemy : Entity
-{
+{   
     [Header("Attack info")]
     public float attackDistance;
     public float attackColdDown;
@@ -22,11 +22,17 @@ public class enemy : Entity
     public float stunTime;
     protected bool canStunned;
     [SerializeField] protected GameObject counterImage;
+    
 
     protected override void Awake()
     {   
         base.Awake();
         stateMachine = new enemyStateMachine();
+    }
+
+    public virtual void enemyDead()
+    {
+        
     }
 
     public virtual void freezeTime(bool isFrozen)

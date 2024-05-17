@@ -18,6 +18,8 @@ public class enemyState
         this.stateMachine = stateMachine;
         this.animBoolName = animBoolName;
     }
+
+
     public virtual void Enter() 
     {
         enemyBase.animator.SetBool(animBoolName, true);

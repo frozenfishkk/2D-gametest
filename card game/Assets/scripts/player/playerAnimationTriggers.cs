@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class playerAnimationTriggers : MonoBehaviour
@@ -17,7 +18,8 @@ public class playerAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<enemy>() != null)
             {
-                hit.GetComponent<enemy>().damage();
+                enemyStats targetStats = hit.GetComponent<enemyStats>();
+                player.playerStats.doDamage(targetStats);
             }
         }
     }

@@ -42,7 +42,7 @@ public class crystalController : MonoBehaviour
         {
             if (hit.GetComponent<enemy>() != null)
             {
-                hit.GetComponent<enemy>().damage();
+                hit.GetComponent<enemy>().damageEffect();
             }
         }
     }

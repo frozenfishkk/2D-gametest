@@ -18,7 +18,8 @@ public class skele_AnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<player>() != null)
             {
-                hit.GetComponent<player>().damage();
+                playerStats target = hit.GetComponent<playerStats>();
+                ske.enemyStats.doDamage(target);
             }
 
         }

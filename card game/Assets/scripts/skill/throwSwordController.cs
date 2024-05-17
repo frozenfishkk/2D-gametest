@@ -48,7 +48,7 @@ public class throwSwordController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         stuckInto(collider);
-        collider.GetComponent<enemy>()?.damage();
+        collider.GetComponent<enemy>()?.damageEffect();
         if (collider.GetComponent <enemy>() !=null)
         {
             if (enemyTarget .Count<=0 &&isBouncing)
@@ -146,7 +146,7 @@ public class throwSwordController : MonoBehaviour
                 Vector2.MoveTowards(transform.position, enemyTarget[targetIndex].position, bounceSpeed*Time.deltaTime);
             if (Vector2.Distance(transform.position, enemyTarget[targetIndex].position)<0.1f)
             {   
-                enemyTarget[targetIndex].GetComponent<enemy>().damage();
+                enemyTarget[targetIndex].GetComponent<enemy>().damageEffect();
                 transform.parent = null;
                 targetIndex++;
                 amountOfBounce--;
@@ -182,7 +182,7 @@ public class throwSwordController : MonoBehaviour
                 {
                     if (hit.GetComponent<enemy>() != null)
                     {
-                        hit.GetComponent<enemy>().damage();
+                        hit.GetComponent<enemy>().damageEffect();
                     }
                 }
             }

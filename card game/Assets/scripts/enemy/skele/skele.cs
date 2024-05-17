@@ -14,8 +14,11 @@ public class skele : enemy
     public skele_attackState attackState { get; private set; }
 
     public skele_stunedState stunedState { get; private set; }
+    
+    public skele_DeadState deadState { get; private set; }
     #endregion
 
+    public enemyStats enemyStats;
 
     protected override void Awake()
     {
@@ -25,17 +28,27 @@ public class skele : enemy
         battleState = new skele_battleState(this, stateMachine, "move", this);
         attackState = new skele_attackState(this, stateMachine, "attack", this);
         stunedState = new skele_stunedState(this, stateMachine, "stun", this);
+        deadState = new skele_DeadState(this, stateMachine, "dead", this);
     }
+
 
     protected override void Start()
     {
         base.Start();
         stateMachine.Initialize(idleState);
+        enemyStats = GetComponent<enemyStats>();
     }
 
     protected override void Update()
     {
         base.Update();
+
+    }
+
+    public override void enemyDead()
+    {
+        base.enemyDead();
+        stateMachine.ChangeState(deadState);
     }
 
     public override bool canBeStunned()

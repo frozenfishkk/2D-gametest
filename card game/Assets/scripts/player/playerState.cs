@@ -46,6 +46,7 @@ public class playerState
     }
 
 
+
     private void checkDash()
     {
         

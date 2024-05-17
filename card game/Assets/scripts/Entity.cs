@@ -5,6 +5,12 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 
 {   
+    #region event
+
+    public System.Action onFlipped;
+    
+
+    #endregion
     [Header("Collision info")]
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected Transform groundCheck;
@@ -27,6 +33,8 @@ public class Entity : MonoBehaviour
     [SerializeField] protected Vector2 knockbackDirection;
     [SerializeField] protected float knockbackDuration;
     protected bool isKnocked;
+
+    public charaterStats charaterStats;
     protected virtual void Awake()
     {
 
@@ -38,6 +46,7 @@ public class Entity : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
+        charaterStats = GetComponent<charaterStats>();
     }
 
     public void invis(bool isInvis)
@@ -69,6 +78,7 @@ public class Entity : MonoBehaviour
     #endregion
     #region Flip
 
+
     public int facingDir { get; private set; } = 1;
     protected bool facingRight = true;
     public virtual void Flip()
@@ -76,6 +86,11 @@ public class Entity : MonoBehaviour
         transform.Rotate(0, 180, 0);
         facingDir *= -1;
         facingRight = !facingRight;
+        if (onFlipped!=null)
+        {
+            onFlipped();
+        }
+        
     }
 
     public virtual void flipController(float x)
@@ -91,7 +106,7 @@ public class Entity : MonoBehaviour
     }
     #endregion
 
-    public virtual void damage()
+    public virtual void damageEffect()
     {
         damagedFX.StartCoroutine("flashFX");
         StartCoroutine("hitKnockBack");

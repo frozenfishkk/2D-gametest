@@ -24,7 +24,7 @@ public class player : Entity
     #endregion
     public GameObject sword{ get; private set; }
     public float swordReturnForce;
-
+    public playerStats playerStats;
 
     #region States
     public playerStateMachine stateMachine { get; private set; }
@@ -50,6 +50,8 @@ public class player : Entity
     public playerCatchSwordState playerCatchSwordState{ get; private set; }
     
     public playerBlackHoleState playerBlackHoleState { get; private set; }
+    
+    public playerDeadState playerDeadState{ get; private set; }
     #endregion
 
     protected override void Awake()
@@ -64,11 +66,14 @@ public class player : Entity
         wallslideState = new playerWallslideState(stateMachine, this, "wallslide");
         walljumpState = new playerWalljumpState(stateMachine, this, "walljump");
         primaryAttackState = new playerPrimaryAttackState(stateMachine, this, "primaryattack");
-         playerCounterAttackState = new playerCounterAttackState(stateMachine, this, "counterattack");
+        playerCounterAttackState = new playerCounterAttackState(stateMachine, this, "counterattack");
         playerSuccessCounterState = new playerSuccessCounterState(stateMachine, this, "successcounter");
         playerAimSwordState = new playerAimSwordState(stateMachine, this, "aimsword");
         playerCatchSwordState = new playerCatchSwordState(stateMachine, this, "catchsword");
         playerBlackHoleState= new playerBlackHoleState(stateMachine, this, "jump");
+        playerDeadState = new playerDeadState(stateMachine, this, "dead");
+        
+        playerStats = GetComponent<playerStats>();
 
 
 
@@ -82,7 +87,12 @@ public class player : Entity
 
     }
 
+    public void playerDead()
+    {
 
+        stateMachine.ChangeState(playerDeadState);
+        
+    }
 
     public void exitBlackHoleSkill()
     {
