@@ -12,7 +12,7 @@ public class stat
     {
         return baseValue;
     }
-
+    
     public void setDefaultValue(float value)
     {
         baseValue = value;

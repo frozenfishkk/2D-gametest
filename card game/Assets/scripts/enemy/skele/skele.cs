@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class skele : enemy
 {
+    
     #region state
     public skele_idleState idleState { get; private set; }
     public skele_moveState moveState { get; private set; }
@@ -37,6 +38,7 @@ public class skele : enemy
         base.Start();
         stateMachine.Initialize(idleState);
         enemyStats = GetComponent<enemyStats>();
+        
     }
 
     protected override void Update()
@@ -49,6 +51,8 @@ public class skele : enemy
     {
         base.enemyDead();
         stateMachine.ChangeState(deadState);
+        
+        
     }
 
     public override bool canBeStunned()

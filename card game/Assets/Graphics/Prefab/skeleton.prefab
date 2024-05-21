@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1888697007
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: -10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.7830189, g: 0.1735938, b: 0.1735938, a: 1}
@@ -225,7 +225,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1888697007
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -362,15 +362,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c958ca19c59cce46800bbdfb8b2a8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage:
-    ModifierList: 
-    baseValue: 40
+  strength:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  agility:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  intelligence:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  vitality:
+    ModifierList: []
+    baseValue: 0
     finalValue: 0
   maxHP:
-    ModifierList: 
+    ModifierList: []
     baseValue: 100
     finalValue: 0
+  armour:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  magicResistance:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  evasion:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  fireResistance:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  iceResistance:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  lightningResistance:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  damage:
+    ModifierList: []
+    baseValue: 40
+    finalValue: 0
+  critChance:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  critDamage:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  fireDamage:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  iceDamage:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  lightningDamage:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  magicDamage:
+    ModifierList: []
+    baseValue: 0
+    finalValue: 0
+  totalInvasion: 0
+  totalCritChance: 0
   currentHP: 0
+  totalCritDmg: 0
+  isIgnite: 0
+  isChilled: 0
+  isShocked: 0
+  effectDuration: 2
+  enemyLevel: 5
+  enemyID: 
+  percentageModifier: 0.1
 --- !u!1 &7651145827398674348
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +519,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1888697007
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -85727878, guid: 687df074731fbf744b668d2275dbb675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -504,3 +578,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitMat: {fileID: 2100000, guid: da10a1b580de0b14ca49009003c79f0b, type: 2}
+  chillColor: {r: 0, g: 0, b: 0, a: 0}
+  igniteColor: []
+  shockColor: {r: 0, g: 0, b: 0, a: 0}

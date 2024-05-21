@@ -10,9 +10,9 @@ public class playerStats : charaterStats
         base.Start();
     }
 
-    public override void takeDamage(float _damage,magicalDmgStat magicalDmg)
+    public override void takeDamage(float _damage,stat fireDMG,stat iceDMG,stat lightningDMG,stat magicalDmg)
     {
-        base.takeDamage(_damage,magicalDmg);
+        base.takeDamage(_damage,fireDMG,iceDMG, lightningDMG, magicalDmg);
         playerManager.instance.player.damageEffect();
         
     }

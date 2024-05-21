@@ -26,16 +26,20 @@ public class charaterStats : MonoBehaviour
     public stat fireDamage;
     public stat iceDamage;
     public stat lightningDamage;
-    private magicalDmgStat totalMagicDmg;
+    public stat magicDamage;
     public float totalInvasion;
     public float totalCritChance;
     public float currentHP;
 
     public float totalCritDmg;
-    
-[Header("magical effect")]
-    public bool isIgnite;
 
+    private entityFx FX;
+
+    [Header("magical effect")] private bool canIgnite;
+    private bool canChill;
+    private bool canShock;
+    public bool isIgnite;
+    
     public bool isChilled;
 
     public bool isShocked;
@@ -52,12 +56,19 @@ public class charaterStats : MonoBehaviour
     {   
         
         float totalDamage =damage.getFinalValue();
-        magicDamageEffect(totalMagicDmg);
-        _targetStats.takeDamage(totalDamage,totalMagicDmg);
-        _targetStats.applyMagicalEffect(isIgnite,isChilled,isShocked);
+        magicDamageEffect(fireDamage,iceDamage,lightningDamage);
+        magicAddOn();
+        _targetStats.takeDamage(totalDamage,fireDamage,iceDamage,lightningDamage,magicDamage);
+        _targetStats.applyMagicalEffect(canIgnite,canChill,canShock);
     }
 
-    public virtual void takeDamage(float _damage,magicalDmgStat magicalDmg)
+    private void magicAddOn()
+    {
+        float dmg = magicDamage.getFinalValue();
+        dmg += intelligence.getFinalValue();
+        magicDamage.setDefaultValue(dmg);
+    }
+    public virtual void takeDamage(float _damage,stat fireDMG,stat iceDMG,stat lightningDMG,stat magicalDmg)
     {
         if (canEvasion())
             return;
@@ -66,7 +77,7 @@ public class charaterStats : MonoBehaviour
             _damage = _damage*critDamage.getFinalValue()/100;
         }
 
-        float magicalDMG = magicalDamageReduction(magicalDmg);
+        float magicalDMG = magicalDamageReduction(fireDMG,iceDMG, lightningDMG, magicalDmg);
         _damage = physicalDamageReduction(_damage);
         currentHP -= _damage;
         currentHP -= magicalDMG;
@@ -91,34 +102,38 @@ public class charaterStats : MonoBehaviour
         isShocked = false;
         effectTimer = Mathf.Infinity;
     }
-    private void magicDamageEffect(magicalDmgStat magicalDmg)
+    private void magicDamageEffect(stat fireDmg, stat iceDmg, stat lightningDmg)
     {
-        if (magicalDmg.fireDmg>0 && magicalDmg.iceDmg<=0 && magicalDmg.lightningDmg<=0)
+        if (fireDmg.getFinalValue() > 0 && iceDmg.getFinalValue() <= 0 && lightningDmg.getFinalValue() <= 0)
         {
-            isIgnite = true;
+            canIgnite = true;
+            
         }
-        else if (magicalDmg.iceDmg > 0 && magicalDmg.fireDmg <= 0 && magicalDmg.lightningDmg <= 0)
+        else if (iceDmg.getFinalValue() > 0 && fireDmg.getFinalValue() <= 0 && lightningDmg.getFinalValue() <= 0)
         {
-            isChilled = true;
+            canChill = true;
+            
         }
-        else if (magicalDmg.lightningDmg > 0 && magicalDmg.iceDmg <= 0 && magicalDmg.fireDmg <= 0)
+        else if (lightningDmg.getFinalValue() > 0 && iceDmg.getFinalValue() <= 0 && fireDmg.getFinalValue() <= 0)
         {
-            isShocked = true;
+            canShock = true;
+            
         }
+
         else
         {
             float r = Random.Range(0, 1);
             if (r<0.33)
             {
-                isIgnite = true;
+                canIgnite = true;
             }
             else if (r<0.66)
             {
-                isChilled = true;
+                canChill = true;
             }
             else
             {
-                isShocked = true;
+                canShock = true;
             }
         }
     }
@@ -137,6 +152,7 @@ public class charaterStats : MonoBehaviour
         if (isIgnite)
         {
             Debug.Log("ignite");
+            FX.invokeIgnite(effectDuration);
         }
         if (isChilled)
         {
@@ -146,14 +162,15 @@ public class charaterStats : MonoBehaviour
         {
             Debug.Log("shocked");
         }
+        
     }
 
-    public  float magicalDamageReduction(magicalDmgStat magicalDmgStat)
+    public  float magicalDamageReduction(stat fireDMG,stat iceDMG,stat lightningDMG,stat magicalDmg)
     {
-        float fire = Mathf.Clamp(magicalDmgStat.fireDmg -fireResistance.getFinalValue(),0,magicalDmgStat.fireDmg);
-        float ice = Mathf.Clamp(magicalDmgStat.iceDmg -iceResistance.getFinalValue(),0,magicalDmgStat.iceDmg);
-        float lightning = Mathf.Clamp(magicalDmgStat.lightningDmg -lightningResistance.getFinalValue(),0,magicalDmgStat.lightningDmg);
-        float addon = Mathf.Clamp(magicalDmgStat.dmgAddon - magicResistance.getFinalValue(),0,magicalDmgStat.dmgAddon);
+        float fire = Mathf.Clamp(fireDMG.getFinalValue() -fireResistance.getFinalValue(),0,fireDMG.getFinalValue());
+        float ice = Mathf.Clamp(iceDMG.getFinalValue() -iceResistance.getFinalValue(),0,iceDMG.getFinalValue());
+        float lightning = Mathf.Clamp(lightningDMG.getFinalValue() -lightningResistance.getFinalValue(),0,lightningDMG.getFinalValue());
+        float addon = Mathf.Clamp(magicalDmg.getFinalValue() - magicResistance.getFinalValue(),0,magicalDmg.getFinalValue());
         return fire + ice + lightning+addon;
     }
     public float physicalDamageReduction(float _dmg)
@@ -193,7 +210,7 @@ public class charaterStats : MonoBehaviour
         totalInvasion = getTotalEvasion(evasion.getFinalValue());
         totalCritChance = getTotalCritChance(critChance.getFinalValue());
         totalCritDmg = getTotalCritDmg(critDamage.getFinalValue());
-        totalMagicDmg = new magicalDmgStat(fireDamage, iceDamage, lightningDamage,intelligence);
+        FX = GetComponentInChildren<entityFx>();
         critDamage.setDefaultValue(150);
         if (onHealthChanged !=null)
         {

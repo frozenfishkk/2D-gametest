@@ -8,6 +8,10 @@ public class entityFx : MonoBehaviour
     [SerializeField] private Material hitMat;
     private Material originalMat;
     private SpriteRenderer render;
+    [SerializeField] private Color chillColor;
+    [SerializeField] private Color[] igniteColor;
+    [SerializeField] private Color shockColor;
+    
 
     private void Start()
     {
@@ -17,9 +21,12 @@ public class entityFx : MonoBehaviour
     }
 
     private IEnumerator flashFX()
-    {
+    {   
+        Color currentColor = render.color;  
+        render.color = Color.white;
         render.material = hitMat;
         yield return new WaitForSeconds(.1f);
+        render.color = currentColor;
         render.material = originalMat;
     }
     private void colorBlink()
@@ -36,4 +43,34 @@ public class entityFx : MonoBehaviour
         CancelInvoke();
         render.color = Color.white; 
     }
+
+    public void invokeIgnite(float _seconds)
+    {
+        InvokeRepeating("igniteColorFX",0,1);
+        Invoke("cancelBlink",_seconds);;
+    }
+
+    public void invokeChill(float _seconds)
+    {
+        render.color = chillColor;
+        Invoke("cancelBlink",_seconds);
+    }
+
+    public void invokeShock(float _seconds)
+    {
+        render.color = shockColor;
+        Invoke("cancelBlink",_seconds);
+    }
+    private void igniteColorFX()
+    {
+        if(render.color!= igniteColor[0])
+        {
+            render.color = igniteColor[0];
+        }
+        else
+            render.color = igniteColor[1];
+    }
+
+
+    
 }

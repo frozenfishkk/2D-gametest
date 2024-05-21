@@ -23,7 +23,7 @@ public class enemy : Entity
     protected bool canStunned;
     [SerializeField] protected GameObject counterImage;
     
-
+    public itemDrop dropController;
     protected override void Awake()
     {   
         base.Awake();
@@ -32,7 +32,7 @@ public class enemy : Entity
 
     public virtual void enemyDead()
     {
-        
+        dropController.dropMultiItem();
     }
 
     public virtual void freezeTime(bool isFrozen)
@@ -58,6 +58,7 @@ public class enemy : Entity
     protected override void Start()
     {
         base.Start();
+        dropController = GetComponent<itemDrop>();
     }
     protected override void  Update()
     {
